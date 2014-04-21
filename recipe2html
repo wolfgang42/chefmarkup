@@ -1,0 +1,31 @@
+#! /usr/bin/python
+from parserecipe import parserecipe
+import sys
+
+recipe = parserecipe(open(sys.argv[1], 'r'))
+print (
+"""<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{title}</title>
+</head><body>
+<h1>{title}</h1>""".format(title=recipe['metadata']['title']))
+print ("<table>")
+for section in recipe['sections']:
+	if section['title'] != '':
+		# TODO section break
+		print ('<tr><td colspan="2"><h2>{}</h2></td></tr>'.format(section['title']))
+	for instruction in section['instructions']:
+		print ('<tr valign="top"><td rowspan="{len}">{text}</td>' \
+			.format(len=max(len(instruction['ingredients']),1),
+			        text = instruction['text']))
+		firstIng = True
+		for ingredient in instruction['ingredients']:
+			if firstIng:
+				firstIng = False
+			else:
+				print ("</tr><tr>")
+			print ("<td>{}</td>".format(" <b>OR</b> ".join(ingredient)))
+		print ("</tr>")
+
+print ("</table></body></html>")
