@@ -45,7 +45,7 @@ I will be adding more features as the need arises.
 `recipe2html` is a simple python script which will generate an HTML file
 from the `.chefml` file. Use it like this:
 ```bash
-python3 recipe2html "Microwave Cheese Sauce.chefml" > "Microwave Cheese Sauce.html"
+./recipe2html "examples/Microwave Cheese Sauce.chefml" > "examples/Microwave Cheese Sauce.html"
 ```
 
 `parserecipe.py` does the heavy-duty parsing of the `.chefml` file and is
