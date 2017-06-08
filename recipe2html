@@ -1,31 +1,15 @@
 #! /usr/bin/env python3
 from parserecipe import parserecipe
+import pyjade, pyjade.ext.jinja
+import jinja2
+from os import path
 import sys
 
-recipe = parserecipe(open(sys.argv[1], 'r'))
-print (
-"""<!DOCTYPE html>
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{title}</title>
-</head><body>
-<h1>{title}</h1>""".format(title=recipe['metadata']['title']))
-print ("<table>")
-for section in recipe['sections']:
-	if section['title'] != '':
-		# TODO section break
-		print ('<tr><td colspan="2"><h2>{}</h2></td></tr>'.format(section['title']))
-	for instruction in section['instructions']:
-		print ('<tr valign="top"><td rowspan="{len}">{text}</td>' \
-			.format(len=max(len(instruction['ingredients']),1),
-			        text = instruction['text']))
-		firstIng = True
-		for ingredient in instruction['ingredients']:
-			if firstIng:
-				firstIng = False
-			else:
-				print ("</tr><tr>")
-			print ("<td>{}</td>".format(" <b>OR</b> ".join(ingredient)))
-		print ("</tr>")
-
-print ("</table></body></html>")
+with open(path.join(path.dirname(path.realpath(__file__)), 'recipe.jade')) as f:
+	JADE_TEMPLATE=f.read()
+template = jinja2.Template(
+	pyjade.utils.process(JADE_TEMPLATE, compiler=pyjade.ext.jinja.Compiler)
+)
+template.environment.globals[pyjade.ext.jinja.ATTRS_FUNC] = pyjade.ext.jinja.attrs
+template.environment.globals[pyjade.ext.jinja.ITER_FUNC] = pyjade.ext.jinja.iteration
+print(template.render(recipe=parserecipe(open(sys.argv[1], 'r'))))
