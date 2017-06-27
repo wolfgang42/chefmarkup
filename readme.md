@@ -38,7 +38,7 @@ been implemented yet.
 The cheese sauce recipe above provides an overview of the language;
 check out [Stuffed Cabbage Rolls](examples/Stuffed Cabbage Rolls.chefml)
 for more advanced features such as multiple sections, or look at the
-[ChefML specification](https://github.com/wolfgang42/chefmarkup/wiki/ChefML-Specification).
+[ChefML specification](./chefml-specification.md).
 I will be adding more features as the need arises.
 
 ## Use
