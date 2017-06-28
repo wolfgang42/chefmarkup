@@ -36,7 +36,18 @@ def parserecipe(f):
 				instructions[-1]['ingredients'].append([line.lstrip()])
 		else: # Instruction
 			# Begin a new one with this line as the text
-			instructions.append({'text': line, 'ingredients': []})
+			if line.startswith('**'):
+				instructions.append({
+					'bold': True,
+					'text': line.lstrip('**').rstrip('**'),
+					'ingredients': [],
+				})
+			else:
+				instructions.append({
+					'bold': False,
+					'text': line,
+					'ingredients': [],
+				})
 	
 	return {'metadata': metadata, 'instructions': instructions}
 

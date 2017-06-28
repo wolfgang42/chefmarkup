@@ -16,7 +16,11 @@ html
 						instruction.ingredients|length
 						if instruction.ingredients|length > 0
 						else 1)
-					)=instruction.text
+					)
+					if instruction.bold
+						b=instruction.text
+					else
+						=instruction.text
 				if instruction.ingredients|length > 0
 					td: +ingredientRender(instruction.ingredients[0])
 			each ingredient in instruction.ingredients[1:]

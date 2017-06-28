@@ -16,6 +16,7 @@ the current version of the specification does not cover the format of this part.
 * An **instruction** is a line of text (to be placed in the left column of the recipe),
   followed by zero or more _ingredients_.
   The string '`(optional)`' at the beginning of an instruction indicates that this instruction--and all of its ingredients--are optional.
+  The characters `**` can be placed before (and optionally after) an instruction to make it bold.
 * An **ingredient** is the part which is placed in the right column;
   it is associated with the preceding instruction.
   An ingredient is indicated with a tab at the beginning of the line.
