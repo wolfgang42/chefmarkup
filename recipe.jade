@@ -5,23 +5,19 @@ html
 		title=recipe.metadata.title
 	body
 		h1=recipe.metadata.title
-		table: each section in recipe.sections
-			if section.title != ''
-				//- TODO section break
-				tr: td(colspan=2): h2=section.title
-			each instruction in section.instructions
-				mixin ingredientRender(ingredient)
-					each option, index in ingredient
-						if index != 0
-							b=' OR '
-						=option
-				tr(valign="top")
-					td(rowspan=(
-							instruction.ingredients|length
-							if instruction.ingredients|length > 0
-							else 1)
-						)=instruction.text
-					if instruction.ingredients|length > 0
-						td: +ingredientRender(instruction.ingredients[0])
-				each ingredient in instruction.ingredients[1:]
-					tr: td: +ingredientRender(ingredient)
+		table: each instruction in recipe.instructions
+			mixin ingredientRender(ingredient)
+				each option, index in ingredient
+					if index != 0
+						b=' OR '
+					=option
+			tr(valign="top")
+				td(rowspan=(
+						instruction.ingredients|length
+						if instruction.ingredients|length > 0
+						else 1)
+					)=instruction.text
+				if instruction.ingredients|length > 0
+					td: +ingredientRender(instruction.ingredients[0])
+			each ingredient in instruction.ingredients[1:]
+				tr: td: +ingredientRender(ingredient)

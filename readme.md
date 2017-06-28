@@ -37,7 +37,7 @@ features such as an ingredient index or a shopping list, though this has not
 been implemented yet.
 The cheese sauce recipe above provides an overview of the language;
 check out [Stuffed Cabbage Rolls](examples/Stuffed Cabbage Rolls.chefml)
-for more advanced features such as multiple sections, or look at the
+for more advanced features, or look at the
 [ChefML specification](./chefml-specification.md).
 I will be adding more features as the need arises.
 
